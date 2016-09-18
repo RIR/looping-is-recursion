@@ -53,9 +53,8 @@
 
 
 (defn cut-at-repetition [a-seq]
-   (loop [[firstElem & elems] a-seq result [] tempSet #{}]
+   (loop [elems a-seq result [] tempSet #{}]
        (if (or (empty? elems)
-               (contains? tempSet firstElem))
-              result
-              (recur elems (conj result firstElem) (conj tempSet firstElem)))))
-
+               (contains? tempSet (first elems)))
+                result
+                (recur (rest elems) (conj result (first elems)) (conj tempSet (first elems))))))
